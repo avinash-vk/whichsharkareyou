@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <h2 class = "header-text" >
-          Working our magic...
+        <h2 class = "header-text">
+          Working our magic<span id = "header-text-ha">.</span>
         </h2>
         <div class="row-container">
              <div class="image-container">
@@ -18,6 +18,15 @@
       </div>
 </template>
 <script>
+setInterval(()=>{
+    let ele = document.getElementById("header-text-ha");
+    if (ele.innerHTML.length > 2){
+        ele.innerHTML = "";
+    }
+    else{
+        ele.innerHTML+=".";
+    }
+},1000);
 export default {
     name:'Loading',
     data: ()=>{
