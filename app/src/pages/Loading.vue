@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2 class = "header-text" >
-          Let's take a picture of your adorable face 
+          Working our magic...
         </h2>
         <div class="image-container">
             <img :src="image" alt="" class="image" />
@@ -17,7 +17,7 @@
 </template>
 <script>
 export default {
-    name:'Start',
+    name:'Loading',
     data: ()=>{
         return {
             isImage:false,

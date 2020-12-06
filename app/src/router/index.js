@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '../pages/Landing.vue'
 import Start from '../pages/Start.vue'
+import Loading from '../pages/Loading.vue'
 const routes = [
   {
     path: '/',
@@ -13,11 +14,21 @@ const routes = [
     name: 'Start',
     component: Start
   },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: Loading
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  data() {
+    return {
+      
+    }
+  },
 })
 
 router.afterEach((to, from) => {

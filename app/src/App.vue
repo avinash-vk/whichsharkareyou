@@ -1,15 +1,26 @@
 <template>
   <div id="nav">
   </div>
-    
-  
-    <router-view v-slot="{ Component }">
-  <transition :name="'slide-fade'">
-    <component :is="Component" />
-  </transition>
-</router-view>
+    <router-view v-slot="{ Component }" :image="image" :setImage="setImage">
+      <transition :name="'slide-fade'">
+        <component :is="Component" />
+      </transition>
+    </router-view>
 </template>
-
+<script>
+export default {
+  data(){
+    return {
+        image: "https://media2.giphy.com/media/dyX9ixfxMpOUGawfdK/giphy.gif",
+    }
+  },
+  methods:{
+    setImage(image){
+      this.image = image;
+    }
+  }
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
