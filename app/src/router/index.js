@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '../pages/Landing.vue'
 import Start from '../pages/Start.vue'
-import Loading from '../pages/Loading.vue'
+import Shark from '../pages/Shark.vue'
 const routes = [
   {
     path: '/',
@@ -15,9 +15,9 @@ const routes = [
     component: Start
   },
   {
-    path: '/loading',
-    name: 'Loading',
-    component: Loading
+    path: '/shark',
+    name: 'Shark',
+    component: Shark
   }
 ]
 
