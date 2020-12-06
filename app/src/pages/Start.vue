@@ -7,7 +7,7 @@
             <img :src="image" alt="" class="image" />
         </div>
         <input type="file" accept="image/*" id="file-input" hidden @change="handleUpload" >
-        <button class="action-button" v-on:click="handleButtonClick " v-if="isImage" style = "background-color:red">
+        <button class="action-button" v-on:click="startChecking" v-if="isImage" style = "background-color:red">
            Test
         </button>
         <button class="action-button" v-on:click="handleButtonClick ">
@@ -18,15 +18,13 @@
 <script>
 export default {
     name:'Start',
-    data: ()=>{
-        return {
-            isImage:false,
-        }
-    },
-    props:['image','setImage'],
+    props:['image','setImage','isImage','setIsImage'],
     methods:{
         handleButtonClick(){
             document.getElementById("file-input").click();
+        },
+        startChecking(){
+            this.$router.push('/loading');
         },
         handleUpload(e){
             const file = e.target.files[0];
@@ -34,9 +32,9 @@ export default {
             reader.readAsDataURL(file);
             reader.onload = e =>{
                 this.setImage(e.target.result);
-                this.isImage = true;
+                this.setIsImage(true);  
+                
             };
-
         }
     }
 }

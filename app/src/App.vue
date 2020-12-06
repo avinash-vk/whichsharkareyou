@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
   </div>
-    <router-view v-slot="{ Component }" :image="image" :setImage="setImage">
+    <router-view v-slot="{ Component }" :image="image" :setImage="setImage" :isImage="isImage" :setIsImage="setIsImage">
       <transition :name="'slide-fade'">
         <component :is="Component" />
       </transition>
@@ -12,11 +12,15 @@ export default {
   data(){
     return {
         image: "https://media2.giphy.com/media/dyX9ixfxMpOUGawfdK/giphy.gif",
+        isImage : false
     }
   },
   methods:{
     setImage(image){
       this.image = image;
+    },
+    setIsImage(value){
+      this.isImage = value;
     }
   }
 }

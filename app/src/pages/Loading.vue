@@ -3,16 +3,18 @@
         <h2 class = "header-text" >
           Working our magic...
         </h2>
-        <div class="image-container">
-            <img :src="image" alt="" class="image" />
+        <div class="row-container">
+             <div class="image-container">
+                <img :src="image" alt="" class="image" />
+            </div>
+            <div class="image-container" style = "background-color:transparent">
+                <img src="https://images.vexels.com/media/users/3/217946/isolated/preview/493329917e728c8e55c2f75e65991d03-curvy-arrow-illustration-by-vexels.png" alt="" class="image arrow" />
+            </div>
+            <div class="image-container" style = "background-color:transparent">
+                <img src="https://66.media.tumblr.com/af13f2bc9960568b96e8098200c1cc4c/tumblr_o10kh5KpFl1qdyauqo1_500.gif" alt="" class="image-large" />
+            </div>
         </div>
-        <input type="file" accept="image/*" id="file-input" hidden @change="handleUpload" >
-        <button class="action-button" v-on:click="handleButtonClick " v-if="isImage" style = "background-color:red">
-           Test
-        </button>
-        <button class="action-button" v-on:click="handleButtonClick ">
-           Upload
-        </button>
+       
       </div>
 </template>
 <script>
@@ -42,12 +44,28 @@ export default {
 }
 </script>
 <style>
+.row-container{
+    display:flex;
+    justify-content: space-around;
+}
+.arrow {
+    transform: rotate(60deg);
+}
+.row-container > div {
+    flex: 1 1 auto;
+    text-align:center;
+    margin:2%;
+}
     .container {
   display:flex;
   align-items:center;
   justify-content: center;
   padding:2%;
   flex-direction: column;
+}
+.image-large{
+    width: 400px;
+height: 350px;
 }
 .image{
   width: 213px;
