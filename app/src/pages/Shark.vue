@@ -4,8 +4,8 @@
         <h2 class="header-text">
             You are a <span style="color:#0097CD">{{data.label}}</span> shark.
         </h2>
-        <div class="image-container">
-            <img :src="data.image" alt="" class="image">
+        <div class="image-container-final">
+            <img :src="data.image" alt="" class="image-shark-final">
         </div>
         <div class="description-container">
             <p class="description">{{data.description}}</p>
@@ -22,6 +22,7 @@ export default {
     components:{
         Loading
     },
+    props:['setName'],
     data(){
         return {
             loading: true,
@@ -41,8 +42,12 @@ export default {
         '$route': 'fetchData'
     },
     methods:{
+        handleButtonClick(){
+            this.setName("");
+            this.$router.push('/')
+        },
         async fetchData () {
-                this.loading = false
+                this.loading = true
                 // replace `getPost` with your data fetching util / API wrapper
                 /*getPost(fetchedId, (err, post) => {
                     // make sure this request is the last one we did, discard otherwise
@@ -56,7 +61,8 @@ export default {
                 })*/
                 await new Promise (resolve => setTimeout(resolve,5000));
                 this.loading = false;
-            }
+
+            }   
     }
 }
 </script>
@@ -69,18 +75,18 @@ export default {
     padding-left:4%;
     padding-right:4%;
 }
-    .container {
+.container {
   display:flex;
   align-items:center;
   justify-content: center;
   padding:2%;
   flex-direction: column;
 }
-.image{
+.image-shark-final{
     width: 529px;
     height: 278px;
 }
-.image-container{
+.image-container-final{
     display: flex;
     align-items: center;
     justify-content: center;

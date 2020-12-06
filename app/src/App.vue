@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
   </div>
-    <router-view v-slot="{ Component }" :image="image" :setImage="setImage" :isImage="isImage" :setIsImage="setIsImage">
+    <router-view v-slot="{ Component }"  :image="image" :setImage="setImage" :isImage="isImage" :setName="setName" :setIsImage="setIsImage" :personName="personName" >
       <transition :name="'slide-fade'">
         <component :is="Component" />
       </transition>
@@ -11,8 +11,9 @@
 export default {
   data(){
     return {
+        personName:"",
         image: "https://media2.giphy.com/media/dyX9ixfxMpOUGawfdK/giphy.gif",
-        isImage : false
+        isImage : false,
     }
   },
   methods:{
@@ -21,6 +22,10 @@ export default {
     },
     setIsImage(value){
       this.isImage = value;
+    },
+    setName(name){
+      this.personName = name;
+      console.log(this.personName,"hee")
     }
   }
 }
@@ -34,19 +39,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  padding:2%;
 }
 </style>
 <style scoped>

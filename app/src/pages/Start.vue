@@ -1,5 +1,14 @@
 <template>
-    <div class="container">
+    <div v-if="personName==''" class="container">
+        <h2 class = "header-text" >
+          What do you want your shark name to be? 
+        </h2>
+        <input type="text" placeholder="Eg: Baby shark" id="name-input" autocomplete="off"/>
+        <button class="action-button" v-on:click="handleButtonClickNext">
+           Next
+        </button>
+    </div>
+    <div v-else class="container">
         <h2 class = "header-text" >
           Let's take a picture of your adorable face 
         </h2>
@@ -10,7 +19,7 @@
         <button class="action-button" v-on:click="startChecking" v-if="isImage" style = "background-color:red">
            Test
         </button>
-        <button class="action-button" v-on:click="handleButtonClick ">
+        <button class="action-button" v-on:click="handleButtonClick">
            Upload
         </button>
       </div>
@@ -18,13 +27,17 @@
 <script>
 export default {
     name:'Start',
-    props:['image','setImage','isImage','setIsImage'],
+    props:['image','setImage','isImage','setIsImage','personName','setName'],
     methods:{
+        handleButtonClickNext(){
+            console.log("HERE",document.getElementById("name-input").value)
+            this.setName(document.getElementById("name-input").value);
+        },
         handleButtonClick(){
             document.getElementById("file-input").click();
         },
         startChecking(){
-            this.$router.push('/loading');
+            this.$router.push('/shark');
         },
         handleUpload(e){
             const file = e.target.files[0];
@@ -40,7 +53,21 @@ export default {
 }
 </script>
 <style>
-    .container {
+#name-input {
+    padding:1.5%;
+    width: 646px;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid #0097CD;
+    font-size:36px;
+    text-align: center;
+    font-family: 'Poppins';
+    margin-bottom:4%;
+}
+#name-input:focus {
+    box-shadow: 0px 0px 8px 0px #0097CD;
+}
+.container {
   display:flex;
   align-items:center;
   justify-content: center;
@@ -48,7 +75,7 @@ export default {
   flex-direction: column;
 }
 .image{
-  width: 213px;
+    width: 213px;
     height: 196px;
 }
 .image-container{

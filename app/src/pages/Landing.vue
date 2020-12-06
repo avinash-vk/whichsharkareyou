@@ -1,9 +1,8 @@
 <template>
   <div class="home">
       <div class="container">
-        <div class="image">
-          <img src="../assets/shark.jpg" alt="" class="image">
-        </div>
+          <img src="../assets/shark.jpg" alt="" class="image-shark">
+        
         <h2 class = "header-text" >
           Which shark are you? 
         </h2>
@@ -34,10 +33,9 @@ export default {
   display:flex;
   align-items:center;
   justify-content: center;
-  padding:2%;
   flex-direction: column;
 }
-.image{
+.image-shark{
   height:241px;
   width:408px;
 }
