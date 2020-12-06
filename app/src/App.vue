@@ -1,6 +1,4 @@
 <template>
-  <div id="nav">
-  </div>
     <router-view v-slot="{ Component }"  :image="image" :setImage="setImage" :isImage="isImage" :setName="setName" :setIsImage="setIsImage" :personName="personName" >
       <transition :name="'slide-fade'">
         <component :is="Component" />

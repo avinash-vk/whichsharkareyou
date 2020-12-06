@@ -5,7 +5,7 @@
             You are a <span style="color:#0097CD">{{data.label}}</span> shark.
         </h2>
         <div class="image-container-final">
-            <img :src="data.image" alt="" class="image-shark-final">
+            <img :src="data.image_url" alt="" class="image-shark-final">
         </div>
         <div class="description-container">
             <p class="description">{{data.description}}</p>
@@ -17,20 +17,17 @@
 </template>
 <script>
 import Loading from './Loading';
+import sharkData from '../../data.json';
 export default {
     name:'Shark',
     components:{
         Loading
     },
-    props:['setName'],
+    props:['setName','image'],
     data(){
         return {
             loading: true,
             data:{
-                label:"Basking",
-                image:"https://www.mcsuk.org/media/f3fc5b139170f774d0561f429953a20607ca9f7d.jpeg",
-                description:"The Basking Shark is the second largest species of extant shark, only smaller than the Whale Shark in overall size. Compared to Great White Sharks, they are much larger. Like whale sharks, basking sharks are filter feeders that grow to enormous size while eating the ocean’s smallest organisms! \n\nBasking sharks can reach enormous sizes – some have been over 40 feet long and weigh as much as 16 tons! Due to their slow movement, docile nature, and lack of sharp teeth, basking sharks have long been a target of the fishing industry. However, its populations have dwindled considerably due to all the harvesting, and the shark is now considered Endangered."
-
            },
         }
     },
@@ -47,21 +44,41 @@ export default {
             this.$router.push('/')
         },
         async fetchData () {
-                this.loading = true
-                // replace `getPost` with your data fetching util / API wrapper
-                /*getPost(fetchedId, (err, post) => {
-                    // make sure this request is the last one we did, discard otherwise
-                    if (this.$route.params.id !== fetchedId) return
-                    this.loading = false
-                    if (err) {
-                    this.error = err.toString()
-                    } else {
-                    this.post = post
-                    }
-                })*/
-                await new Promise (resolve => setTimeout(resolve,5000));
-                this.loading = false;
+                function dataURItoBlob(dataURI) {
+                // convert base64 to raw binary data held in a string
+                // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+                var byteString = atob(dataURI.split(',')[1]);
 
+                // separate out the mime component
+                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                // write the bytes of the string to an ArrayBuffer
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ab], { type: mimeString });
+                }
+
+            const blob = dataURItoBlob(this.image);
+            const file = new File([blob], "resultimg");
+                const formData = new FormData();
+
+                formData.append('image', file);
+
+                const options = {
+                    method: 'POST',
+                    body: formData,
+                };
+                
+                fetch('http://localhost:5000/api/predict', options)
+                .then(resp => resp.json())
+                .then(resp => {
+                    this.data = sharkData[resp.class]
+                    this.loading = false;
+                })
+                .error(err => console.log(err));
             }   
     }
 }
